@@ -15,7 +15,7 @@ Acesse http://localhost:4173. Também é possível abrir index.html com Live Ser
 ## Acesso de demonstração
 
 E-mail: operacao@transpologi.demo. Senha: demo123.
-Qualquer e-mail válido e senha com quatro caracteres funciona. Os perfis mudam a tela de entrada; não são controles reais de autorização. Não use credenciais pessoais.
+Qualquer e-mail válido e senha com quatro caracteres funciona. Não há autorização real. Não use credenciais pessoais.
 
 ## Fluxo
 
@@ -28,7 +28,7 @@ Qualquer e-mail válido e senha com quatro caracteres funciona. Os perfis mudam 
 
 ## Painel do motorista
 
-O despachante não acessa a tela do motorista. O motorista entra com o perfil Motorista e escolhe o veículo. Para demonstrar os dois lados, abra duas abas: uma como Despachante e outra como Motorista. Os dados sincronizam pelo localStorage.
+A tela de entrada é só do despachante. O painel do motorista fica no endereço do próprio dispositivo: http://localhost:4173/#motorista/V01 (troque o V01 pelo veículo). Para demonstrar os dois lados, abra duas abas, uma em cada endereço; os dados sincronizam pelo localStorage.
 
 Navegação: o motorista escolhe Waze, Google Maps ou Apple Maps (ou "Perguntar sempre"). Ao confirmar uma etapa, o app abre o navegador escolhido na próxima parada por link direto (por exemplo `https://waze.com/ul?ll=LAT,LNG&navigate=yes`). As coordenadas estão em `places` no `app.js` e são fictícias; troque pelas da unidade.
 

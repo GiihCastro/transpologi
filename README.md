@@ -20,13 +20,19 @@ Qualquer e-mail válido e senha com quatro caracteres funciona. Os perfis mudam 
 ## Fluxo
 
 1. Solicitações: crie um pedido. Alta prioridade exige justificativa.
-2. Preparação: libere carga e recebimento.
-3. Planejamento: compare veículos e aprove um compatível disponível.
-4. Comunicação: confirme, registre coleta e entrega pelo simulador ou pelo rádio.
-5. Histórico: consulte os eventos e exporte CSV.
-6. Frota: altere disponibilidade e canal. Ocorrências não liberam cargas embarcadas.
+2. Preparação: libere carga e destino.
+3. Plano do sistema: na Central, o sistema sugere veículo e rota para cada pedido liberado (prioridade, prazo, menor veículo livre que comporta a carga). Nada é enviado até o despachante confirmar, um a um ou o plano inteiro.
+4. Aceite: o motorista precisa aceitar a tarefa e confirmar cada mudança de rota. Reprodução de áudio não conta como confirmação.
+5. Sem resposta: passado o prazo (padrão 90 s, ajustável em Preferências), o despachante pode reenviar ou passar a tarefa a outro veículo livre e compatível. Se havia mudança de rota pendente, ela é substituída e o novo trajeto segue com o outro veículo. Com a carga já embarcada, só é possível reenviar ou falar pelo rádio.
+6. Registro: consulte os eventos e exporte CSV.
 
-Dados em localStorage, sessão em sessionStorage. Configurações > Restaurar demonstração repõe o cenário inicial.
+## Painel do motorista
+
+O despachante não acessa a tela do motorista. O motorista entra com o perfil Motorista e escolhe o veículo. Para demonstrar os dois lados, abra duas abas: uma como Despachante e outra como Motorista. Os dados sincronizam pelo localStorage.
+
+Navegação: o motorista escolhe Waze, Google Maps ou Apple Maps (ou "Perguntar sempre"). Ao confirmar uma etapa, o app abre o navegador escolhido na próxima parada por link direto (por exemplo `https://waze.com/ul?ll=LAT,LNG&navigate=yes`). As coordenadas estão em `places` no `app.js` e são fictícias; troque pelas da unidade.
+
+Ainda não implementado: aviso ao chegar a cerca de 200 m do destino (exige GPS em segundo plano e app nativo ou PWA com permissão de localização).
 
 ## Arquivos
 
@@ -37,12 +43,10 @@ Dados em localStorage, sessão em sessionStorage. Configurações > Restaurar de
 
 ## Limites
 
-Sem backend, autenticação real, envio de WhatsApp, GPS, solver ou integração industrial. Atribuições por regras locais de disponibilidade/capacidade. Dados fictícios. Referência à unidade Pecém apenas como cenário, sem vínculo comercial. As fontes Google são opcionais; há fallback local.
+Sem backend, autenticação real, envio de WhatsApp, GPS, solver ou integração industrial. O "sistema inteligente" é uma heurística local de disponibilidade e capacidade, não um motor de otimização. Dados fictícios. Referência à unidade Pecém apenas como cenário, sem vínculo comercial. As fontes Google são opcionais; há fallback local.
 
 Não há edição automática de rotas nem cancelamento de compromissos por falha de comunicação. Protótipo não deve ser usado em operação real. Toda interação móvel deve ocorrer com veículo parado em local seguro e permitido.
 
-## Roteiro e avisos por voz
+## Avisos por voz
 
-Roteiro mostra a ordem de coletas e entregas por veículo, separando compromissos das sugestões por prioridade e prazo. Não calcula trajetos geográficos ou otimização matemática.
-
-Comunicação contém um painel de motorista com voz opcional. Clique em Ativar avisos e depois Testar alerta de mudança. A fala usa o recurso do navegador, nesta aba; não envia áudio a outro dispositivo e não garante funcionamento em segundo plano ou com a tela bloqueada. Simular falta de conexão deixa o aviso pendente e bloqueia confirmações do painel, mantendo o registro pelo rádio. O teste não muda a rota e não confirma leitura.
+O painel do motorista tem voz opcional (recurso do navegador, nesta aba). Não envia áudio a outro dispositivo, não garante funcionamento em segundo plano e não comprova que o motorista ouviu. "Simular falta de conexão" (controles da demonstração) deixa o aviso pendente e bloqueia confirmações no painel, mantendo o registro pelo rádio.
